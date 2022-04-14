@@ -28,7 +28,7 @@ body {
     width: 42px;
     height: 31px;
 }
-.conteiner {
+.container {
     margin: 120px auto;
 }
 .entrada{
@@ -55,19 +55,38 @@ body {
 .menssagem {
     background-color: #FFFFFF;
 }
-.privado {
+.private_message {
     background-color: #FFDEDE;
 }
 .footer {
     display: flex;
+    align-items: center;
     width: 100%;
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
     background-color: #FFFFFF;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+.footer img {
+    width: 30px;
+    height: 30px;
+    margin-right: 20px;
 }
 input {
     font-family: 'Roboto', sans-serif;
+    
     font-size: 18px;
     width: 100%;
     height: 93px;
+    background-color: #FFFFFF;
+    border: none;
+}
+input:focus {
+    outline: none;
+}
+::placeholder {
+    font-style: italic;
+    color: black;
 }
