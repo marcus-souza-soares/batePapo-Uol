@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+body {
+    background-color: #E5E5E5;
+}
+
+.topo{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding: 20px 30px;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-shadow: 10px 0px 10px rgb(151, 149, 149);
+}
+.topo img:first-child{
+    width: 75px;
+    height: 53px;
+}
+.topo img:last-child{
+    width: 42px;
+    height: 31px;
+}
+.conteiner {
+    margin: 120px auto;
+}
+.entrada{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin: 5px auto;
+    display: flex;
+    line-height: 25px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    
+}
+.entrada strong {
+    font-weight: bold;
+}
+.entrada .horario {
+    margin: 5px;
+    color: #aaaaaa;
+}
+.status {
+    background-color: #DCDCDC;
+}
+.menssagem {
+    background-color: #FFFFFF;
+}
+.privado {
+    background-color: #FFDEDE;
+}
+.footer {
+    display: flex;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    background-color: #FFFFFF;
+}
+input {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    width: 100%;
+    height: 93px;
+}
