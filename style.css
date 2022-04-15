@@ -28,6 +28,9 @@ body {
     width: 42px;
     height: 31px;
 }
+.topo img:last-child:hover{
+    cursor: pointer;
+}
 .container {
     margin: 120px auto;
 }
@@ -52,7 +55,7 @@ body {
 .status {
     background-color: #DCDCDC;
 }
-.menssagem {
+.message {
     background-color: #FFFFFF;
 }
 .private_message {
@@ -73,6 +76,9 @@ body {
     width: 30px;
     height: 30px;
     margin-right: 20px;
+}
+.footer img:hover{
+    cursor: pointer;
 }
 input {
     font-family: 'Roboto', sans-serif;
