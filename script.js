@@ -2,6 +2,7 @@ let container = document.querySelector(".container");
 let cadastro = prompt("Qual é seu nome? ");
 let verificar_nome = false;
 let usuario;
+let mensagem_salva;
 
 function login(){
 
@@ -10,25 +11,17 @@ function login(){
     };
     const requisicao = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', usuario);
 
-
-    requisicao.catch(function (){
-        alert("Nome ja em uso! tente outro.");
-        location. reload();
-    })
-
-
-
-
-
-
-    
-   
     const usuarioativo = axios.post('https://mock-api.driven.com.br/api/v6/uol/status', usuario);
     
     let mantercoenxao = setInterval(manterConexao,5000);
     
     requisicao.then(mantercoenxao);
-    requisicao.catch(erroLogin);
+
+    requisicao.catch(function (){
+        alert("Nome ja em uso! tente outro.");
+        location. reload();
+    })
+    
     
     
     function manterConexao() {
@@ -42,8 +35,21 @@ function login(){
         console.log("deu erro");
         console.log(statusCode);
     }
+    /// O principal continua daqui
+
+
+
+
+
+
+
+
+
+
+
 }
 function buscarMensagens(){
+    
     let promise = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
     
     promise.then(redenrizarMensagens);
@@ -53,6 +59,7 @@ function buscarMensagens(){
         let ultimamsg;
         console.log(dados);
         container.innerHTML = "";
+        let lista_message = [0];
         for (i = 0; i < dados.length; i ++){
             if (dados[i].type === 'status'){
                 container.innerHTML += 
@@ -79,20 +86,28 @@ function buscarMensagens(){
                 <span><h1><strong>${dados[i].from} </strong>para <strong>${dados[i].to}: </strong>${dados[i].text}</h1></span>
             </div>`
             }
-            if ((dados[dados.length-1].type == 'message') || (dados[dados.length-1].type == 'private-message')){
-                ultimamsg = document.querySelector('.container div:last-child');
-                let verifica_message = []
+            
+        }   
+        if ((dados[dados.length-1].type == 'message') || (dados[dados.length-1].type == 'private-message')){
+            let ultimamsg = document.querySelector(".container div:last-child");
+            
 
-                verifica_message.push(ultimamsg).from;
+            // lista_message.push(dados[dados.length-1].type);
+            // lista_message.push(dados[dados.length-2].type);
+            mensagem_salva = dados[dados.length-1];
 
-                if ((dados[dados.length-1].from != dados[dados.length-2].from) && (dados[dados.length-1].text != dados[dados.length-2].text)){
-                    ultimamsg.scrollIntoView();
-                    ultimamsg = 0;
-                }
+            if (mensagem_salva == dados[dados.length-1]){
+                ultimamsg.scrollIntoView();
             }
+            mensagem_salva = dados[dados.length-1];
         }
+
     }
 }
+
+
+
+
 function enviarMensagem(){
     let enviar = document.querySelector(".enviar");
 
