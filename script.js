@@ -2,13 +2,23 @@ let container = document.querySelector(".container");
 let cadastro = prompt("Qual é seu nome? ");
 let verificar_nome = false;
 let usuario;
-let mensagem_salva;
+let lista_message = [];
+let dados_messagem;
+
+
+//variaveis para as menssagens
+let participante;
+let visibilidade;
 
 function login(){
 
     usuario = {
         name: cadastro
     };
+
+
+    
+
     const requisicao = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', usuario);
 
     const usuarioativo = axios.post('https://mock-api.driven.com.br/api/v6/uol/status', usuario);
@@ -22,7 +32,9 @@ function login(){
         location. reload();
     })
     
-    
+
+  
+
     
     function manterConexao() {
         console.log('usuario logado');
@@ -30,24 +42,48 @@ function login(){
         //console.log(.status)
     }
     
-    function erroLogin(erro) {
-        const statusCode = erro.response.status;
-        console.log("deu erro");
-        console.log(statusCode);
-    }
     /// O principal continua daqui
 
-
-
-
-
-
-
-
-
-
+   
 
 }
+
+
+
+
+
+
+  //função paara a lista de participantes
+  const promise_participantes = axios.get('https://mock-api.driven.com.br/api/v6/uol/participants');
+
+
+
+  function participantes (usuarios) {
+    let lista = document.querySelector(".participantes ul");
+    
+    console.log(usuarios.data.length);
+    for (i = 1; i < usuarios.data.length; i++){
+            
+        console.log(usuarios.data[i].name);
+        lista.innerHTML += ` 
+        <li>
+            <span>
+                <img src="imagens/pessoas.png">
+            </span>
+            <span>
+                <h2 onclick="selecionarParticipante(this)">${usuarios.data[i].name}</h2>
+            </span>
+        </li>` 
+      }
+      console.log(lista);
+  }
+  promise_participantes.then(participantes);
+
+
+login();
+
+
+
 function buscarMensagens(){
     
     let promise = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
@@ -55,58 +91,72 @@ function buscarMensagens(){
     promise.then(redenrizarMensagens);
 
     function redenrizarMensagens(resposta){
-        let dados = resposta.data;
-        let ultimamsg;
-        console.log(dados);
+        dados_messagem = resposta.data;
+        console.log(dados_messagem);
         container.innerHTML = "";
-        let lista_message = [0];
-        for (i = 0; i < dados.length; i ++){
-            if (dados[i].type === 'status'){
+        for (i = 0; i < dados_messagem.length; i ++){
+            if (dados_messagem[i].type === 'status'){
                 container.innerHTML += 
-                `<div class="entrada ${dados[i].type}">
-                    <span class="horario"><h1 horário>(${dados[i].time})</h1>
+                `<div class="entrada ${dados_messagem[i].type}">
+                    <span class="horario"><h1 horário>(${dados_messagem[i].time})</h1>
                     </span>
-                    <span><h1><strong>${dados[i].from} </strong>${dados[i].text}</h1></span>
+                    <span><h1><strong>${dados_messagem[i].from} </strong>${dados_messagem[i].text}</h1></span>
                 </div>`
-            } else if (dados[i].type === 'private_message'){
+            } else if (dados_messagem[i].type === 'private_message'){
                // Verifica se a mensagem privada é minha ou pra mim.
-                if (dados[i].from === cadastro || dados[i].to === cadastro){
+                if (dados_messagem[i].from === cadastro || dados_messagem[i].to === cadastro){
                     container.innerHTML += 
-                    `<div class="entrada ${dados[i].type}">
-                        <span class="horario"><h1 horário>(${dados[i].time})</h1>
+                    `<div class="entrada ${dados_messagem[i].type}">
+                        <span class="horario"><h1 horário>(${dados_messagem[i].time})</h1>
                         </span>
-                        <span><h1><strong>${dados[i].from} </strong> reservadamente para <strong>${dados[i].to}: </strong>${dados[i].text}</h1></span>
+                        <span><h1><strong>${dados_messagem[i].from} </strong> reservadamente para <strong>${dados_messagem[i].to}: </strong>${dados_messagem[i].text}</h1></span>
                     </div>`
                 }
-            } else if (dados[i].type === 'message') {
+            } else if (dados_messagem[i].type === 'message') {
             container.innerHTML += 
-            `<div class="entrada ${dados[i].type}">
-                <span class="horario"><h1 horário>(${dados[i].time})</h1>
+            `<div class="entrada ${dados_messagem[i].type}">
+                <span class="horario"><h1 horário>(${dados_messagem[i].time})</h1>
                 </span>
-                <span><h1><strong>${dados[i].from} </strong>para <strong>${dados[i].to}: </strong>${dados[i].text}</h1></span>
+                <span><h1><strong>${dados_messagem[i].from} </strong>para <strong>${dados_messagem[i].to}: </strong>${dados_messagem[i].text}</h1></span>
             </div>`
             }
-            
-        }   
-        if ((dados[dados.length-1].type == 'message') || (dados[dados.length-1].type == 'private-message')){
-            let ultimamsg = document.querySelector(".container div:last-child");
-            
-
-            // lista_message.push(dados[dados.length-1].type);
-            // lista_message.push(dados[dados.length-2].type);
-            mensagem_salva = dados[dados.length-1];
-
-            if (mensagem_salva == dados[dados.length-1]){
-                ultimamsg.scrollIntoView();
-            }
-            mensagem_salva = dados[dados.length-1];
         }
-
+        if ((dados_messagem[dados_messagem.length-1].type == 'message') || (dados_messagem[dados_messagem.length-1].type == 'private-message')){
+            let ultimamsg = document.querySelector(".container div:last-child");
+            lista_message.push(dados_messagem[dados_messagem.length-1]);
+    
+            if (lista_message.length < 3){
+                if (lista_message.length == 1){
+                    lista_message.push(dados_messagem[dados_messagem.length-1]);
+                    ultimamsg.scrollIntoView();
+                } else if (lista_message[0] != lista_message[1]){
+                        lista_message.push(dados_messagem[dados_messagem.length-1]);
+                        ultimamsg.scrollIntoView();
+                        lista_message.splice(0,1);
+                }
+            }
+        } 
     }
 }
 
 
 
+//// menu lateral 
+function menulateral (){
+    let fundo = document.querySelector(".plano-de-fundo02");
+    fundo.classList.toggle("sumir");
+
+    let menu = document.querySelector(".menu-lateral");
+    menu.classList.toggle("sumir");
+}
+
+function selecionarParticipante(elemento){
+    participante = elemento.innerHTML;
+} 
+
+function selecionarVisibilidade(elemento) {
+    visibilidade = elemento.innerHTML; 
+}
 
 function enviarMensagem(){
     let enviar = document.querySelector(".enviar");
@@ -133,5 +183,8 @@ function enviarMensagem(){
     })
 }
 
+
+
+
+
 setInterval(buscarMensagens,3000);
-login();

@@ -11,87 +11,80 @@
 <body>
     <div class="topo">
         <img src="imagens/batepapo.png" alt="">
-        <img src="imagens/pessoas.png" alt="">
+        <img src="imagens/pessoas.png" onclick="menulateral()" alt="">
     </div>
     <div class="container">
-        <!-- <div class="entrada status">
-            <span class="horario"><h1 horário>(09:21:45)</h1>
-            </span>
-            <span><h1><strong>João </strong>entra na sala...</h1></span>
-        </div>
-        <div class="entrada menssagem">
-            <span class="horario"><h1 horário>(09:22:28)</h1></span>
-            <span><h1><strong>João </strong>para <strong>Todos: </strong>Olá, bom dia!</h1></span>
-        </div>
-        <div class="entrada menssagem privado">
-            <span class="horario"><h1 horário>(09:22:28)</h1></span>
-            <span><h1><strong>João </strong>reservadamente para <strong>Maria: </strong>Olá, bom dia! gostaria muito de te conhecer melhor.</h1></span>
-        </div>
-
-        <div class="entrada status">
-            <span class="horario"><h1 horário>(09:21:45)</h1>
-            </span>
-            <span><h1><strong>João </strong>entra na sala...</h1></span>
-        </div>
-        <div class="entrada menssagem">
-            <span class="horario"><h1 horário>(09:22:28)</h1></span>
-            <span><h1><strong>João </strong>para <strong>Todos: </strong>Olá, bom dia!</h1></span>
-        </div>
-        <div class="entrada menssagem privado">
-            <span class="horario"><h1 horário>(09:22:28)</h1></span>
-            <span><h1><strong>João </strong>reservadamente para <strong>Maria: </strong>Olá, bom dia! gostaria muito de te conhecer melhor.</h1></span>
-        </div>
-
-        <div class="entrada status">
-            <span class="horario"><h1 horário>(09:21:45)</h1>
-            </span>
-            <span><h1><strong>João </strong>entra na sala...</h1></span>
-        </div>
-        <div class="entrada menssagem">
-            <span class="horario"><h1 horário>(09:22:28)</h1></span>
-            <span><h1><strong>João </strong>para <strong>Todos: </strong>Olá, bom dia!</h1></span>
-        </div>
-        <div class="entrada menssagem privado">
-            <span class="horario"><h1 horário>(09:22:28)</h1></span>
-            <span><h1><strong>João </strong>reservadamente para <strong>Maria: </strong>Olá, bom dia! gostaria muito de te conhecer melhor.</h1></span>
-        </div>
-
-        <div class="entrada status">
-            <span class="horario"><h1 horário>(09:21:45)</h1>
-            </span>
-            <span><h1><strong>João </strong>entra na sala...</h1></span>
-        </div>
-        <div class="entrada menssagem">
-            <span class="horario"><h1 horário>(09:22:28)</h1></span>
-            <span><h1><strong>João </strong>para <strong>Todos: </strong>Olá, bom dia!</h1></span>
-        </div>
-        <div class="entrada menssagem privado">
-            <span class="horario"><h1 horário>(09:22:28)</h1></span>
-            <span><h1><strong>João </strong>reservadamente para <strong>Maria: </strong>Olá, bom dia! gostaria muito de te conhecer melhor.</h1></span>
-        </div>
-
-        <div class="entrada status">
-            <span class="horario"><h1 horário>(09:21:45)</h1>
-            </span>
-            <span><h1><strong>João </strong>entra na sala...</h1></span>
-        </div>
-        <div class="entrada menssagem">
-            <span class="horario"><h1 horário>(09:22:28)</h1></span>
-            <span><h1><strong>João </strong>para <strong>Todos: </strong>Olá, bom dia!</h1></span>
-        </div>
-        <div class="entrada menssagem privado">
-            <span class="horario"><h1 horário>(09:22:28)</h1></span>
-            <span><h1><strong>João </strong>reservadamente para <strong>Maria: </strong>Olá, bom dia! gostaria muito de te conhecer melhor.</h1></span>
-        </div> -->
-        <!-- Termino dos exemplos -->
+       
     </div>
     <div class="footer">
-        <input type="text" class="enviar" placeholder="  Escreva aqui...">
+        <div>
+            <input type="text" class="enviar" placeholder="  Escreva aqui...">
+            <h2>oiiiiii</h2>
+        </div>
         <img src="imagens/send.png"  onclick="enviarMensagem()">
     </div>
-    <div class="plano-de-fundo02">
-        <div class="menu-lateral">
-            meu menu
+    <div class="plano-de-fundo02 sumir" onclick="menulateral()">
+        <div class="menu-lateral sumir">
+            <div>
+                <h1>
+                    Escolha um contado para enviar mensagem:
+                </h1>
+            </div>
+            <div class="participantes">
+                <ul>
+                    <li>
+                        <span>
+                            <img src="imagens/pessoas.png">
+                        </span>
+                        <span>
+                            <h2>Todos</h2>
+                        </span>
+                    </li>
+                    <li>
+                        <span>
+                            <img src="imagens/avatar.png">
+                        </span>
+                        <span>
+                            <h2>João</h2>
+                        </span>
+                    </li>
+                    <li>
+                        <span>
+                            <img src="imagens/avatar.png">
+                        </span>
+                        <span>
+                            <h2>Maria</h2>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="visibilidade">
+                <h1>
+                    Escolha a visibilidade:
+                    <ul>
+                        <li>
+                            <span>
+                                <img src="imagens/publico.png">
+                            </span>
+                            <span>
+                                <h2>
+                                    Público
+                                </h2>
+                            </span>
+                        </li>
+                        <li>
+                            <span>
+                                <img src="imagens/reservadamente.png">
+                            </span>
+                            <span>
+                                <h2>
+                                    Reservadamente
+                                </h2>
+                            </span>
+                        </li>
+                    </ul>
+                </h1>
+            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
